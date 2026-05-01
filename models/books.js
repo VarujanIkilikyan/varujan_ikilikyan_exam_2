@@ -1,5 +1,6 @@
 import path from 'path'
 import fs from "fs/promises";
+import {v4 as uuidV4} from'uuid'
 
 export function pathCreate(filename) {
     return path.resolve(process.cwd(), filename);
@@ -33,4 +34,31 @@ export  async  function findAll(userId, page, limit){
 
     return{ books: [...userBooks.slice(skip, skip + limit)], total: userBooks.length };
 
+}
+
+export async function findById(id) {
+    try {
+        const allUsers = await readJSON(path);
+
+        const book = allBooks.find(book => book.bookId === id);
+
+        return book === undefined ? null : book;
+    } catch
+        (error) {
+        throw new Error(`Error reading or filtering data from file: ${error.message}`);
+    }
+}
+
+export async function create(data){
+    try {
+        const newBook = {...data,id: uuidV4()};
+        const allBooks = await readJSON(path);
+        allBooks.push(newBook);
+
+        return newBook;
+
+    } catch
+        (error) {
+        throw new Error(`Error reading or filtering data from file: ${error.message}`);
+    }
 }
