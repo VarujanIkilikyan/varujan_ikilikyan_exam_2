@@ -6,5 +6,15 @@
   "repository": "https://github.com/VarujanIkilikyan/varujan_ikilikyan_exam_2.git",
   "author": "varujan ikilikyan",
   "license": "MIT",
-  "private": true
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "devnode": "node -r dotenv/config ./bin/www dotenv_config_path=./.env",
+    "devmoon": "nodemon -r dotenv/config ./bin/www dotenv_config_path=./.env"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "nodemon": "^3.1.14"
+  }
 }
