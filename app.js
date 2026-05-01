@@ -10,6 +10,14 @@ import errorHandler from './middlewares/errorHandler.js';
 const app = express();
 const {PORT} = process.env || 3000;
 
+app.use(routes);
+
+app.use(morgan('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use(errorHandler.notFound);
+app.use(errorHandler.errors);
 const server = createServer(app)
 
 server.listen(PORT, () => {
