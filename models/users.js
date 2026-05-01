@@ -1,6 +1,9 @@
 import path from 'path'
 import fs from 'fs/promises'
 import {v4 as uuidV4} from'uuid'
+import md5 from 'md5';
+
+const {PASSWORD_SECRET} = process.env;
 
 export function pathCreate(filename) {
     return path.resolve(process.cwd(), filename);
@@ -76,4 +79,8 @@ export async function create(data){
         (error) {
         throw new Error(`Error reading or filtering data from file: ${error.message}`);
     }
+}
+
+export function hashPassword(password) {
+    return md5(md5(password) + PASSWORD_SECRET);
 }
