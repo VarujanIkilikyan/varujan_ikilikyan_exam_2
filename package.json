@@ -9,8 +9,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "devnode": "node -r dotenv/config ./bin/www dotenv_config_path=./.env",
-    "devmoon": "nodemon -r dotenv/config ./bin/www dotenv_config_path=./.env"
+    "devnode": "node -r dotenv/config app.js dotenv_config_path=./.env",
+    "devmoon": "nodemon -r dotenv/config app.js dotenv_config_path=./.env"
   },
   "dependencies": {
     "dotenv": "^17.4.2",
