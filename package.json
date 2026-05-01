@@ -1,0 +1,10 @@
+{
+  "name": "varujan_ikilikyan_exam_2",
+  "version": "1.0.0",
+  "description": "exam2",
+  "main": "app.js",
+  "repository": "https://github.com/VarujanIkilikyan/varujan_ikilikyan_exam_2.git",
+  "author": "varujan ikilikyan",
+  "license": "MIT",
+  "private": true
+}
