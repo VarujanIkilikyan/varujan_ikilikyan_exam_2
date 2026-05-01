@@ -2,8 +2,9 @@ import path from 'path'
 import fs from 'fs/promises'
 import {v4 as uuidV4} from'uuid'
 import md5 from 'md5';
+import CryptoJS from 'crypto-js';
 
-const {PASSWORD_SECRET} = process.env;
+const {PASSWORD_SECRET,TOKEN_SECRET} = process.env;
 
 export function pathCreate(filename) {
     return path.resolve(process.cwd(), filename);
@@ -83,4 +84,33 @@ export async function create(data){
 
 export function hashPassword(password) {
     return md5(md5(password) + PASSWORD_SECRET);
+}
+
+export function encrypt(data) {
+    return CryptoJS.AES.encrypt(
+        JSON.stringify(data), TOKEN_SECRET).toString();
+}
+
+export function decrypt(ciphertext) {
+    try {
+        const bytes = CryptoJS.AES.decrypt(ciphertext, TOKEN_SECRET);
+        return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+    } catch (e) {
+        return null;
+    }
+
+
+}
+
+export  default {
+    pathCreate,
+    readJSON,
+    writeJsonFile,
+    findById,
+    findByEmail,
+    checkEmailUnique,
+    create,
+    hashPassword,
+    encrypt,
+    decrypt,
 }
