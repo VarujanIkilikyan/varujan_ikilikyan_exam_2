@@ -62,3 +62,26 @@ export async function create(data){
         throw new Error(`Error reading or filtering data from file: ${error.message}`);
     }
 }
+
+export async function update(id, userId, data){
+    try {
+        let book = await findById(id) ;
+        if(!book){
+            throw new TypeError('book not found');
+        }
+        if (book.userId !== userId){
+            throw new TypeError('user not found');
+        }
+
+        book = {...data,}
+        const allBooks = await readJSON(path);
+        allBooks.filter(book=>book.bookId !== id)
+        allBooks.push(book);
+
+        return book;
+
+    } catch
+        (error) {
+        throw new Error(`Error reading or filtering data from file: ${error.message}`);
+    }
+}
