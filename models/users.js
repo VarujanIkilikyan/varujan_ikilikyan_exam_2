@@ -112,5 +112,5 @@ export  default {
     create,
     hashPassword,
     encrypt,
-    decrypt,
+    decrypt
 }
