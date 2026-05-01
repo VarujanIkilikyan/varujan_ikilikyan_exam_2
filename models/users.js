@@ -1,5 +1,6 @@
 import path from 'path'
 import fs from 'fs/promises'
+import {v4 as uuidV4} from'uuid'
 
 export function pathCreate(filename) {
     return path.resolve(process.cwd(), filename);
@@ -38,3 +39,41 @@ export async function findById(id) {
     }
 }
 
+export async function findByEmail(email) {
+    try {
+        const allUsers = await readJSON(path);
+
+        const user = allUsers.find(user => user.email === email);
+
+        return user === undefined ? null : user;
+    } catch
+        (error) {
+        throw new Error(`Error reading or filtering data from file: ${error.message}`);
+    }
+}
+
+export async function checkEmailUnique(email){
+    try {
+        const allUsers = await readJSON(path);
+
+        return allUsers.some(user => user.email === email);
+
+    } catch
+        (error) {
+        throw new Error(`Error reading or filtering data from file: ${error.message}`);
+    }
+}
+
+export async function create(data){
+    try {
+        const newUser = {...data,id: uuidV4()};
+        const allUsers = await readJSON(path);
+        allUsers.push(newUser);
+
+        return newUser;
+
+    } catch
+        (error) {
+        throw new Error(`Error reading or filtering data from file: ${error.message}`);
+    }
+}
