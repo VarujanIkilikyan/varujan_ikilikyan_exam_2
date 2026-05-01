@@ -25,3 +25,12 @@ export async function writeJsonFile(filePath, data) {
         throw new Error(`Error writing file: ${error.message}`);
     }
 }
+
+export  async  function findAll(userId, page, limit){
+    const allBooks = await readJSON(path);
+    const userBooks = allBooks.filter(book => book.userId === userId);
+    const skip = (page - 1) * limit;
+
+    return{ books: [...userBooks.slice(skip, skip + limit)], total: userBooks.length };
+
+}
